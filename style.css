@@ -7,16 +7,15 @@
 body {
     font-family: "Poppins", sans-serif;
     min-height: 100vh;
-    min-width: 100vh;
     display: flex;
-    /* align-items: center;
-    justify-content: center; */
-    perspective: 750px;
-    /* position: relative; */
+    perspective: 1000px;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
 }
 
 .scene {
-    width: 20%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -25,62 +24,120 @@ body {
 }
 
 .card {
-    margin: auto;
-    min-height: 20vh;
-    width: 20rem;
-    border-radius: 30px;
-    padding: 0rem 5rem;
-    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2), 0px 0px 50px rgba(0, 0, 0, 0.2);
-    position: absolute;
-    cursor: pointer;
+    -ms-transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
     transform-style: preserve-3d;
+    -ms-transform-origin: center right;
+    -webkit-transform-origin: center right;
+    -moz-transform-origin: center right;
+    -o-transform-origin: center right;
     transform-origin: center right;
+    -ms-transition: transform 1s;
+    -webkit-transition: transform 1s;
+    -moz-transition: transform 1s;
+    -o-transition: transform 1s;
     transition: transform 1s;
     display: flex;
     color: #333;
 }
 
 .card.is-flipped {
+    -ms-transform: translateX(-100%) rotateY(-180deg);
+    -webkit-transform: translateX(-100%) rotateY(-180deg);
+    -moz-transform: translateX(-100%) rotateY(-180deg);
+    -o-transform: translateX(-100%) rotateY(-180deg);
     transform: translateX(-100%) rotateY(-180deg);
+    -ms-transition: all 1s ease-in;
+    -webkit-transition: all 1s ease-in;
+    -moz-transition: all 1s ease-in;
+    -o-transition: all 1s ease-in;
+    transition: all 1s ease-in;
 }
 
 .card__face {
-    display: flex;
-    position: relative;
-    width: initial;
-    height: initial;
     backface-visibility: hidden;
-    /* background: coral; */
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 0;
+    -webkit-backface-visibility: hidden;
+    -webkit-transform: translate3d(0, 0, 0);
+    visibility: visible;
+    backface-visibility: hidden;
 }
 
-.card__face--front {
+/* .card__face--front {
     position: relative;
     display: flex;
+} */
+
+.front_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.front_card {
+    transform-style: preserve-3d;
+    min-height: 10vh;
+    width: 20rem;
+    border-radius: 30px;
+    padding: 1.5rem 5rem;
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2), 0px 0px 50px rgba(0, 0, 0, 0.2);
 }
 
 .card__face--back {
+    -ms-transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
     transform: rotateY(180deg);
     position: fixed;
     top: 0%;
-    /* display: flex; */
-    /* background: blue; */
+}
+
+.back_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: initial;
+}
+
+.back_card {
+    display: inline-block;
+    transform-style: preserve-3d;
+    min-height: 10vh;
+    width: 20rem;
+    border-radius: 30px;
+    padding: 1rem;
+    height: 36.7em;
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2), 0px 0px 50px rgba(0, 0, 0, 0.2);
 }
 
 .hero {
-    /* margin: 1.5em; */
-    padding-top: 1.5em;
     display: flex;
     align-items: center;
     justify-content: center;
     position: absolute;
-    right: -2px;
+    transition: all 1s ease-in;
+    padding-bottom: 2em;
+}
+
+.hero.hidden {
+    opacity: 0%;
+    transition: all 0.5s ease-in-out;
+    pointer-events: none;
 }
 
 .hero img {
     width: 10rem;
     z-index: 2;
-    transition: all 0.75s ease-out;
-    border-radius: 100%;
+    border-radius: 50%;
+    -ms-transition: all 0.75s ease-in-out;
+    -webkit-transition: all 0.75s ease-in-out;
+    -moz-transition: all 0.75s ease-in-out;
+    -o-transition: all 0.75s ease-in-out;
+    transition: all 0.75s ease-in-out;
 }
 
 .circle {
@@ -99,29 +156,25 @@ body {
 
 .title {
     justify-content: center;
+    transition: 0.75s ease-out;
 }
 
 .info {
     padding-top: 15em;
+    transition: all 1s ease-in-out;
+}
+
+.info.hidden {
+    opacity: 0%;
+    transition: all 0.5s ease-in-out;
+    pointer-events: none;
 }
 
 .info h1 {
     font-size: 1.5em;
     text-align: center;
     transition: all 0.75s ease-out;
-    filter: invert(0);
 }
-
-/* .container h1{
-    filter:invert(0)
-}
-.container h1:hover{
-    filter: invert(100);
-} */
-
-/* .info h1:hover{
-    filter: invert(100%);
-} */
 
 .info h3 {
     font-size: 0.7rem;
@@ -152,24 +205,12 @@ body {
     background: none;
 }
 
-/* .social button {
-    padding: 0.5rem 2rem;
-    background: none;
-    border: none;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
-    border-radius: 30px;
-    cursor: pointer;
-    font-weight: bold;
-    color: #585858;
-  } */
-
-/* button.active {
-    background: #585858;
-    color: white;
-} */
+.social a img {
+    height: 40px;
+    width: 40px;
+}
 
 .work {
-    padding: 0.5rem 0rem 5rem 0rem;
     transition: all 0.75s ease-out;
     text-align: center;
     height: 60px;
@@ -188,59 +229,101 @@ body {
     width: 100%;
 }
 
+.work button, button:active, button:focus {
+    outline: none !important;
+}
+
 .skill-cards-1 {
     display: flex;
     position: absolute;
     width: 285px;
     height: 150px;
-    left: -223px;
-    top: 23px;
     background: #585858;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 15px;
     text-align: center;
     align-items: center;
-    padding: auto;
-    /* padding-top: 2em; */
+    text-shadow: 0px 5px 10px #323232;
+    color: #e4e4e4;
+    cursor: pointer;
+    padding: 3rem;
+    margin: 1px;
+    top: 40px;
 }
 
-.skill-cards-1 img{
-    position: relative;
+.skill-cards-1 img {
+    position: absolute;
     z-index: 1;
     opacity: 35%;
-
+    padding: 2em;
+    top: -18px;
 }
 
 .skill-cards-1 h2 {
     position: absolute;
     z-index: 2;
-    padding: auto;
     font-size: 21px;
     font-weight: 500;
-    
-
-
+    font-weight: bold;
 }
-
 
 .skill-cards-2 {
     position: absolute;
     width: 285px;
     height: 150px;
-    left: -223px;
-    top: 208px;
+    top: 220px;
     background: #94805F;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 15px;
+    text-align: center;
+    text-shadow: 0px 5px 10px #323232;
+    color: #e4e4e4;
+    cursor: pointer;
+    margin: 1px;
+}
+
+.skill-cards-2 img {
+    position: relative;
+    z-index: 1;
+    opacity: 35%;
+    top: 12px;
+}
+
+.skill-cards-2 h2 {
+    position: absolute;
+    z-index: 2;
+    font-size: 21px;
+    font-weight: 500;
+    padding: 1.8rem 4.3rem;
 }
 
 .skill-cards-3 {
     position: absolute;
     width: 285px;
     height: 150px;
-    left: -223px;
-    top: 393px;
+    top: 390px;
     background: #585858;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 15px;
+    text-align: center;
+    text-shadow: 0px 5px 10px #323232;
+    color: #e4e4e4;
+    cursor: pointer;
+    top: 400px;
+}
+
+.skill-cards-3 img {
+    position: relative;
+    z-index: 1;
+    opacity: 35%;
+    top: 12px;
+}
+
+.skill-cards-3 h2 {
+    position: absolute;
+    z-index: 2;
+    font-size: 21px;
+    font-weight: 500;
+    padding: 1.8rem 6.35rem;
+    font-weight: bold;
 }
