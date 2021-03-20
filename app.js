@@ -17,6 +17,8 @@ card_back.addEventListener('click', function () {
   info.classList.toggle('hidden');
 });
 
+// FRONT ANIMATION
+
 
 //Movement Animation to happen
 const front_card = document.querySelector(".front_card");

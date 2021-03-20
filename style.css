@@ -17,8 +17,8 @@ body {
 
 .scene {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    /* justify-content: center; */
+    /* align-items: center; */
     position: initial;
     margin: auto;
 }
@@ -60,10 +60,9 @@ body {
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     -webkit-perspective: 0;
-    -webkit-backface-visibility: hidden;
     -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0,0,0);
     visibility: visible;
-    backface-visibility: hidden;
 }
 
 /* .card__face--front {
@@ -79,6 +78,7 @@ body {
 
 .front_card {
     transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
     min-height: 10vh;
     width: 20rem;
     border-radius: 30px;
@@ -94,6 +94,9 @@ body {
     transform: rotateY(180deg);
     position: fixed;
     top: 0%;
+    -webkit-perspective: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 .back_container {
