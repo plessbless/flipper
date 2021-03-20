@@ -1,0 +1,28 @@
+{
+  "name": "flipper",
+  "version": "1.0.0",
+  "description": "flipping buiseness card",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/plessbless/flipper.git"
+  },
+  "author": "pless",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/plessbless/flipper/issues"
+  },
+  "homepage": "https://github.com/plessbless/flipper#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.2.2",
+    "babel-preset-env": "^1.7.0",
+    "webpack": "^5.27.0",
+    "webpack-cli": "^4.5.0",
+    "webpack-dev-server": "^3.11.2"
+  }
+}
