@@ -2,6 +2,12 @@ const webpack = require('webpack')
 const path = require('path');
 
 module.exports = {
+        entry: [
+        './src/app.js',
+    ],
+    output: {
+        filename: './src/index.js'
+    },
     mode: 'development',
     devServer: {
         historyApiFallback: true,
