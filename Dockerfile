@@ -1,6 +1,6 @@
 FROM node:14
 
-WORKDIR /app
+WORKDIR /flipper
 ADD . .
 RUN npm install
 
