@@ -31,6 +31,10 @@ jobs:
           docker-username: DOCKER_LOGIN
           docker-password: DOCKER_PASSWORD
           registry: docker.io
+      - run:
+          name: Tag image
+          command: |
+            docker tag $DOCKER_LOGIN/$CIRCLE_PROJECT_REPONAME:$CIRCLE_SHA1 $DOCKER_LOGIN/$CIRCLE_PROJECT_REPONAME
       - docker/push:
           image: $DOCKER_LOGIN/$CIRCLE_PROJECT_REPONAME
           tag: '${CIRCLE_BUILD_NUM},latest'
