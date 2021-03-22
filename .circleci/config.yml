@@ -32,7 +32,7 @@ jobs:
           docker-password: DOCKER_PASSWORD
           registry: docker.io
       - docker/push:
-          image: $DOCKER_LOGIN/$CIRCLE_PROJECT_REPONAME:$CIRCLE_SHA1
+          image: $DOCKER_LOGIN/$CIRCLE_PROJECT_REPONAME
           tag: '${CIRCLE_BUILD_NUM},latest'
 
 workflows:
