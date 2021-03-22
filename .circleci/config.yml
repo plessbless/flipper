@@ -6,19 +6,39 @@ jobs:
     executor: docker/machine
     steps:
       - checkout
-      - docker/check:
-          docker-username: DOCKER_LOGIN
-          docker-password: DOCKER_PASSWORD
-          registry: docker.io
       - docker/build:
           dockerfile: Dockerfile
           image: $DOCKER_LOGIN/$CIRCLE_PROJECT_REPONAME
           tag: $CIRCLE_SHA1
+      - docker/check:
+          docker-username: DOCKER_LOGIN
+          docker-password: DOCKER_PASSWORD
+          registry: docker.io
       - docker/push:
           image: $DOCKER_LOGIN/$CIRCLE_PROJECT_REPONAME
           tag: $CIRCLE_SHA1
+
+  test:
+    executor: docker/machine
+    steps:
+      - docker/pull:
+          images: '$DOCKER_LOGIN/$CIRCLE_PROJECT_REPONAME:$CIRCLE_SHA1'
+      - run:
+          name: Test
+          command: |
+            docker run -t $DOCKER_LOGIN/$CIRCLE_PROJECT_REPONAME:$CIRCLE_SHA1 npm test
+      - docker/check:
+          docker-username: DOCKER_LOGIN
+          docker-password: DOCKER_PASSWORD
+          registry: docker.io
+      - docker/push:
+          image: $DOCKER_LOGIN/$CIRCLE_PROJECT_REPONAME
+          tag: '$CIRCLE_BUILD_NUM,latest'
 
 workflows:
   master:
     jobs:
       - build
+      - test:
+          requires:
+            - build
